@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Fim.Models.aluguere>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+
+@if (Model != null && Model.Any())
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.datainicio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tempo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.custo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.carro.modelo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cliente.nome)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.datainicio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tempo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.custo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.carro.modelo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.idcli)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.idal }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.idal }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.idal })
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+else
+{
+    <h1>Lista Vazia</h1>
+}
+
+
+

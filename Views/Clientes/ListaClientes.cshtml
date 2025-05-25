@@ -1,0 +1,88 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<Fim.Models.cliente>
+@*@model IEnumerable<Fim.Models.cliente>  era preciso antes da linha acima*@
+
+@{
+    ViewBag.Title = "ListaClientes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Lista de Clientes</h2>
+<h4 style="color:red;">@ViewBag.msg</h4>
+<p>
+    @Html.ActionLink("Create New", "AddCliente", "Clientes", new { @class = "btn btn-primary" })
+</p>
+
+
+
+
+
+
+
+<table class="table table-bordered table-responsive table-striped table-primary">
+    <tr>
+        <th>
+            Idcli
+        </th>
+        <th>
+            Nome
+        </th>
+        <th>
+            Data de Nascimento
+        </th>
+        <th>
+            Idade
+        </th>
+        <th>
+            Categoria
+        </th>
+        <th>
+            foto
+        </th>
+        <th>
+            Tutor
+        </th>
+        <th>Comandos</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.idcli)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.datanasc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.idade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.categoria)
+            </td>
+            <td>
+                @if (item.fotopath == null)
+                {
+                    <img src="@Url.Content("/fotos/nophoto.png")" alt="" style="height:90px;" } />}
+                else
+                {<img src="@Url.Content($"/fotos/{item.fotopath}")" alt="" style="height:90px;" } />}
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cliente1.nome)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditCliente", new { id = item.idcli }) |
+                @Html.ActionLink("Details", "Detailcliente", new { id = item.idcli }) |
+                @*@Html.ActionLink("Delete", "Delete", new { id = item.idcli })*@
+                <a href="@Url.Action("DeleteCliente","Clientes", new {id = item.idcli})"><i class="fa fa-trash-o"></i></a>
+            </td>
+        </tr>
+    }
+
+</table>
+Página @(Model.PageNumber > Model.PageCount?1: Model.PageNumber) de @Model.PageNumber
+
+@Html.PagedListPager(Model, (page) => Url.Action("ListaClientes", "Clientes", new { page }))

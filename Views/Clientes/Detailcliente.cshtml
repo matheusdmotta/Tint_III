@@ -1,0 +1,82 @@
+﻿@model Fim.Models.cliente
+
+@{
+    ViewBag.Title = "Detailcliente";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detailcliente</h2>
+
+<div>
+    <h4>cliente</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.datanasc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.datanasc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idade)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.categoria)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.categoria)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fotopath)
+        </dt>
+
+        <dd>
+            @if (Model.fotopath != null)
+            {
+                <img style="width:200px" src="@Url.Content($"~/foto/{Model.fotopath}")" />
+            }
+            else
+            {
+                <img style="width:200px" src="@Url.Content("~/foto/nophoto.png")" />
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cliente1.nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cliente1.nome)
+        </dd>
+
+    </dl>
+</div>
+<h1>Lista de Alugueres</h1>
+
+
+
+@{
+    Html.RenderAction("Alugueres", "Clientes", new { id = Model.idcli });
+}
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idcli }) |
+    @Html.ActionLink("Back to List", "ListaClientes")
+</p>
